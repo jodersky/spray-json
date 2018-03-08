@@ -8,7 +8,7 @@ lazy val sprayJson =
     .in(file("."))
     .settings(
       name := "spray-json",
-      version := "1.3.4",
+      version := "1.3.5",
       scalaVersion := crossScalaVersions.value.head,
       scalacOptions ++= Seq("-feature", "-language:_", "-unchecked", "-deprecation", "-Xlint", "-encoding", "utf8"),
       (scalacOptions in doc) ++= Seq("-doc-title", name.value + " " + version.value),
@@ -55,7 +55,7 @@ lazy val sprayJson =
       OsgiKeys.additionalHeaders := Map("-removeheaders" -> "Include-Resource,Private-Package"),
       mimaPreviousArtifacts := (CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, 13)) => Set.empty
-        case _ => Set("io.spray" %% "spray-json" % "1.3.3")
+        case _ => Set("io.spray" %% "spray-json" % "1.3.4")
       }),
       mimaBinaryIssueFilters := Seq(
         ProblemFilters.exclude[ReversedMissingMethodProblem]("spray.json.PrettyPrinter.organiseMembers")
