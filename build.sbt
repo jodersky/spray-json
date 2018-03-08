@@ -73,3 +73,10 @@ lazy val sprayJson =
 lazy val sprayJsonJVM = sprayJson.jvm
 lazy val sprayJsonJS = sprayJson.js
 lazy val sprayJsonNative = sprayJson.native
+
+lazy val root = (project in file("."))
+  .aggregate(sprayJsonJVM, sprayJsonJS, sprayJsonNative)
+  .settings(
+    publish := {},
+    publishLocal := {}
+  )
