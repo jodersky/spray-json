@@ -9,8 +9,7 @@ lazy val sprayJson =
     .settings(
       name := "spray-json",
       version := "1.3.4",
-      crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.4", "2.13.0-M3"),
-      scalaVersion := "2.11.12",
+      scalaVersion := crossScalaVersions.value.head,
       scalacOptions ++= Seq("-feature", "-language:_", "-unchecked", "-deprecation", "-Xlint", "-encoding", "utf8"),
       (scalacOptions in doc) ++= Seq("-doc-title", name.value + " " + version.value),
       libraryDependencies ++=
@@ -26,26 +25,30 @@ lazy val sprayJson =
           CrossVersion.binaryScalaVersion(sV)
         else
           sV
-      }
+      },
+      // Workaround for "Shared resource directory is ignored"
+      // https://github.com/portable-scala/sbt-crossproject/issues/74
+      unmanagedResourceDirectories in Test += (baseDirectory in ThisBuild).value / "shared/src/test/resources"
     )
-    .configurePlatforms(JVMPlatform)( _
-      .enablePlugins(spray.boilerplate.BoilerplatePlugin)
-      .enablePlugins(SbtOsgi)
-    )
-    .jvmSettings(
+    .enablePlugins(spray.boilerplate.BoilerplatePlugin)
+    .platformsSettings(JVMPlatform, JSPlatform)(
       libraryDependencies ++= (CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, 10)) => Seq(
-          "org.specs2" %% "specs2-core" % "3.8.9" % "test",
-          "org.specs2" %% "specs2-scalacheck" % "3.8.9" % "test",
-          "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
+          "org.specs2" %%% "specs2-core" % "3.8.9" % "test",
+          "org.specs2" %%% "specs2-scalacheck" % "3.8.9" % "test",
+          "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
         )
         case Some((2, n)) if n >= 11 => Seq(
-          "org.specs2" %% "specs2-core" % "4.0.2" % "test",
-          "org.specs2" %% "specs2-scalacheck" % "4.0.2" % "test",
-          "org.scalacheck" %% "scalacheck" % "1.13.5" % "test"
+          "org.specs2" %%% "specs2-core" % "4.0.2" % "test",
+          "org.specs2" %%% "specs2-scalacheck" % "4.0.2" % "test",
+          "org.scalacheck" %%% "scalacheck" % "1.13.5" % "test"
         )
         case _ => Nil
-      }),
+      })
+    )
+    .configurePlatforms(JVMPlatform)(_.enablePlugins(SbtOsgi))
+    .jvmSettings(
+      crossScalaVersions := Seq("2.13.0-M3", "2.12.4", "2.11.12", "2.10.7"),
       OsgiKeys.exportPackage := Seq("""spray.json.*;version="${Bundle-Version}""""),
       OsgiKeys.importPackage := Seq("""scala.*;version="$<range;[==,=+);%s>"""".format(scalaVersion.value)),
       OsgiKeys.importPackage ++= Seq("""spray.json;version="${Bundle-Version}"""", "*"),
@@ -58,8 +61,14 @@ lazy val sprayJson =
         ProblemFilters.exclude[ReversedMissingMethodProblem]("spray.json.PrettyPrinter.organiseMembers")
       )
     )
-    .jsSettings()
-    .nativeSettings() // defined in sbt-scala-native
+    .jsSettings(
+      crossScalaVersions := Seq("2.12.4", "2.11.12")
+    )
+    .nativeSettings(
+      crossScalaVersions := Seq("2.11.12"),
+      // Disable tests in Scala Native until testing frameworks for it become available
+      unmanagedSourceDirectories in Test := Seq.empty
+    )
 
 lazy val sprayJsonJVM = sprayJson.jvm
 lazy val sprayJsonJS = sprayJson.js
