@@ -1,8 +1,8 @@
 inThisBuild(Seq(
-  organization := "io.spray",
-  organizationHomepage := Some(new URL("http://spray.io")),
+  organization := "io.crashbox",
+  organizationHomepage := Some(new URL("https://crashbox.io")),
   description := "A Scala library for easy and idiomatic JSON (de)serialization",
-  homepage := Some(new URL("https://github.com/spray/spray-json")),
+  homepage := Some(new URL("https://github.com/jodersky/spray-json")),
   startYear := Some(2011),
   licenses := Seq("Apache 2" -> new URL("http://www.apache.org/licenses/LICENSE-2.0.txt")),
   publishMavenStyle := true,
@@ -17,11 +17,12 @@ inThisBuild(Seq(
   pomIncludeRepository := { _ => false },
   pomExtra :=
     <scm>
-      <url>git://github.com/spray/spray.git</url>
-      <connection>scm:git:git@github.com:spray/spray.git</connection>
+      <url>git://github.com/jodersky/spray-json.git</url>
+      <connection>scm:git:git@github.com:jodersky/spray-json.git</connection>
     </scm>
       <developers>
         <developer><id>sirthias</id><name>Mathias Doenitz</name></developer>
         <developer><id>jrudolph</id><name>Johannes Rudolph</name></developer>
+        <developer><id>jodersky</id><name>Jakob Odersky</name></developer>
       </developers>
 ))

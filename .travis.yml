@@ -5,7 +5,7 @@ jdk:
   - oraclejdk8
 
 before_install:
-  - curl https://raw.githubusercontent.com/scala-native/scala-native/9069e8d447f7a9a5439bffbb6a706b5cc70bd631/bin/travis_setup.sh | bash -x
+  - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
 
 script:
   - sbt +test +mimaReportBinaryIssues
@@ -13,14 +13,9 @@ script:
 before_cache:
   - find $HOME/.sbt -name "*.lock" | xargs rm
   - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
-  - rm -rf $HOME/.ivy2/{cache,local}/io.spray/
+  - rm -rf $HOME/.ivy2/{cache,local}/io.crashbox/
 
 cache:
   directories:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/boot/
-
-#notifications:
-#  email:
-#    - johannes@spray.io
-#    - mathias@spray.io

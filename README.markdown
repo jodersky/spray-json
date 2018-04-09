@@ -1,3 +1,16 @@
+[![Build Status](https://travis-ci.org/jodersky/spray-json.svg?branch=master)](https://travis-ci.org/jodersky/spray-json)
+
+*This repository is a fork of the spray-json project. Its purpose is
+to make spray available for ScalaJS and ScalaNative.*
+
+*It remains fully binary compatible with the upstream project and can
+be used as a drop-in replacement on the JVM.*
+
+```scala
+libraryDependencies += "io.crashbox" %%% "spray-json" % "<latest_version>"
+```
+----
+
 _spray-json_ is a lightweight, clean and efficient [JSON] implementation in Scala.
 
 It supports the following features:
