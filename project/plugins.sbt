@@ -1,6 +1,7 @@
 addSbtPlugin("io.spray" % "sbt-boilerplate" % "0.6.1")
 addSbtPlugin("com.typesafe.sbt" % "sbt-osgi" % "0.9.3")
-addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.0")
+addSbtPlugin("io.crashbox" % "sbt-gpg" % "0.1.3")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "2.3")
 addSbtPlugin("com.typesafe" % "sbt-mima-plugin" % "0.1.18")
 
 addSbtPlugin("org.scala-js"       % "sbt-scalajs"              % "0.6.21")

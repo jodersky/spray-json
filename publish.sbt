@@ -6,7 +6,6 @@ inThisBuild(Seq(
   startYear := Some(2011),
   licenses := Seq("Apache 2" -> new URL("http://www.apache.org/licenses/LICENSE-2.0.txt")),
   publishMavenStyle := true,
-  useGpg := true,
   publishTo := {
     val nexus = "https://oss.sonatype.org/"
     if (version.value.trim.endsWith("SNAPSHOT"))
@@ -24,5 +23,9 @@ inThisBuild(Seq(
         <developer><id>sirthias</id><name>Mathias Doenitz</name></developer>
         <developer><id>jrudolph</id><name>Johannes Rudolph</name></developer>
         <developer><id>jodersky</id><name>Jakob Odersky</name></developer>
-      </developers>
+      </developers>,
+  version := {
+    import sys.process._
+    ("git describe --always --dirty=-SNAPSHOT --match v[0-9].*" !!).tail.trim
+  }
 ))

@@ -8,7 +8,6 @@ lazy val sprayJson =
     .in(file("."))
     .settings(
       name := "spray-json",
-      version := "1.3.5",
       scalaVersion := crossScalaVersions.value.head,
       scalacOptions ++= Seq("-feature", "-language:_", "-unchecked", "-deprecation", "-Xlint", "-encoding", "utf8"),
       (scalacOptions in doc) ++= Seq("-doc-title", name.value + " " + version.value),

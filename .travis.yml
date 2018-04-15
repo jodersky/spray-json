@@ -4,11 +4,14 @@ language: scala
 jdk:
   - oraclejdk8
 
+env:
+  global:
+    secure: efWQKYAykm6LPAP+xhNrDe542eIBJ9Sp/mV6IoUatpJhpLBV121Ln5tcLbwHrbNFNL8Zv5KcvuV6/oAoHi/Qw6TksZfNaUZCCiaKv04lEsTVMVcGQTUv633HEBunJkGswsZtnHrlXLOD2lsdnS9QPmPI+iQFqRGjAMloN+G3gyrei5W+3Y8Lkrherf5nsl5S2i2MFQdzP3JVqjszXLRys86/xWp8vgWg1zQQ8zP/FJUX0qTaNAc/N6M5Lv56fJ4bmNBeILTkCpOTmnP2dE+C7BkfzmgCVdxvEc2elb6YUooZRWgWJkZ0G51CBMHTWTi3/yT0IMttJrsMSbNVXT4F3/RYXJ/4rO04u9ut3vS9MCfJoZJVDaAetXo6pm9klxakkKYazisz8pdufcNFBlMQcJW53MlGQfXW3LFb/e7wGOX0Y27CtVjBl+qKuHjmMYC97eInfxKKBR/ycmE4NQC606yRTKbTQTI4Uset70BiqQClJ1pqBehxijnB9v1RvSA/jEoCzWowBY+8zac12GvUgTFAB7DGmzrWr6DhRe2GHNfZ8Az02AGIv+IZq/3u/MD3MGMRGZBIxoZglhCD1vmIVUslDF8EeCgzXqkAlqP/77rjK+UnerHWcVtUCv7zjR60Lnh+2lAD2HcBbzJdwNLszfB5hdBjNOgZeMJ+OACa8hY=
+
 before_install:
   - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
 
-script:
-  - sbt +test +mimaReportBinaryIssues
+script: .ci/build
 
 before_cache:
   - find $HOME/.sbt -name "*.lock" | xargs rm
