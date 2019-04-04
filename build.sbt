@@ -2,6 +2,11 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 import com.typesafe.tools.mima.core.{ProblemFilters, ReversedMissingMethodProblem}
 
+lazy val scala210 = "2.10.7"
+lazy val scala211 = "2.11.12"
+lazy val scala212 = "2.12.8"
+lazy val scala213 = "2.13.0-M5"
+
 lazy val sprayJson =
   crossProject(JVMPlatform, JSPlatform, NativePlatform)
     .crossType(CrossType.Full)
@@ -40,7 +45,7 @@ lazy val sprayJson =
     )
     .configurePlatforms(JVMPlatform)(_.enablePlugins(SbtOsgi))
     .jvmSettings(
-      crossScalaVersions := Seq("2.13.0-M5", "2.12.7", "2.11.12", "2.10.7"),
+      crossScalaVersions := Seq(scala213, scala212, scala211, scala210),
       OsgiKeys.exportPackage := Seq("""spray.json.*;version="${Bundle-Version}""""),
       OsgiKeys.importPackage := Seq("""scala.*;version="$<range;[==,=+);%s>"""".format(scalaVersion.value)),
       OsgiKeys.importPackage ++= Seq("""spray.json;version="${Bundle-Version}"""", "*"),
@@ -54,10 +59,10 @@ lazy val sprayJson =
       )
     )
     .jsSettings(
-      crossScalaVersions := Seq("2.12.6", "2.11.12")
+      crossScalaVersions := Seq(scala212, scala211)
     )
     .nativeSettings(
-      crossScalaVersions := Seq("2.11.12"),
+      crossScalaVersions := Seq(scala211),
       // Disable tests in Scala Native until testing frameworks for it become available
       unmanagedSourceDirectories in Test := Seq.empty
     )
