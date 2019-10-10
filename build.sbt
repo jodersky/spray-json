@@ -4,8 +4,8 @@ import com.typesafe.tools.mima.core.{ProblemFilters, ReversedMissingMethodProble
 
 lazy val scala210 = "2.10.7"
 lazy val scala211 = "2.11.12"
-lazy val scala212 = "2.12.8"
-lazy val scala213 = "2.13.0"
+lazy val scala212 = "2.12.10"
+lazy val scala213 = "2.13.1"
 
 lazy val sprayJson =
   crossProject(JVMPlatform, JSPlatform, NativePlatform)
@@ -59,7 +59,7 @@ lazy val sprayJson =
       )
     )
     .jsSettings(
-      crossScalaVersions := Seq(scala212, scala211)
+      crossScalaVersions := Seq(scala213, scala212, scala211)
     )
     .nativeSettings(
       crossScalaVersions := Seq(scala211),
