@@ -15,6 +15,7 @@ lazy val sprayJson =
       name := "spray-json",
       scalaVersion := crossScalaVersions.value.head,
       scalacOptions ++= Seq("-feature", "-language:_", "-unchecked", "-deprecation", "-Xlint", "-encoding", "utf8"),
+      javacOptions ++= Seq("-target", "1.8"),
       (scalacOptions in doc) ++= Seq("-doc-title", name.value + " " + version.value),
       scalaBinaryVersion := {
         val sV = scalaVersion.value
